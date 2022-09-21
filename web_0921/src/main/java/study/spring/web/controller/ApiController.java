@@ -2,6 +2,7 @@ package study.spring.web.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.spring.web.domain.Person;
 
@@ -22,11 +23,25 @@ public class ApiController {
     }
 
     @GetMapping("/person")
-    public Person person() {
+    public Person person(@RequestParam("code") String name,
+                         @RequestParam("age") int age) {
         Person person = new Person();
-        person.setName("금현호");
-        person.setAge((int)System.currentTimeMillis() % 90 + 10);
+        person.setName(name);
+        //person.setAge((int)System.currentTimeMillis() % 90 + 10);
+        person.setAge(age);
 
         return person;
     }
+
+    @GetMapping("/hello")
+    public String hello(@RequestParam(value = "name", required = false) String name) {
+        return "안녕하세요 " + name + "님!";
+    }
+
+    @GetMapping("/add")
+    public String add(@RequestParam(value = "value1", defaultValue = "10") int value1,
+                      @RequestParam(value = "value2", defaultValue = "15") int value2) {
+        return String.format("%d + %d = %d", value1, value2, value1 + value2);
+    }
+
 }
