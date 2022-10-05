@@ -1,10 +1,7 @@
 package study.spring.web.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import study.spring.web.domain.Person;
 
@@ -39,6 +36,26 @@ public class HomeController {
         person.setAge(25);
 
         mv.addObject("person", person);
+
+        return mv;
+    }
+
+    @GetMapping("/signin")
+    public String signin() {
+        return "signin";
+    }
+
+    @PostMapping("/signin-result")
+    public ModelAndView signinResult(
+            @RequestParam("id") String id
+            , @RequestParam("name") String name
+            , @RequestParam("city") String city
+    ) {
+        ModelAndView mv = new ModelAndView("signin-result");
+
+        mv.addObject("id", id);
+        mv.addObject("name", name);
+        mv.addObject("city", city);
 
         return mv;
     }
