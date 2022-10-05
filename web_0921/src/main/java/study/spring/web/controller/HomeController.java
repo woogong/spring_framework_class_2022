@@ -13,6 +13,7 @@ import study.spring.web.service.NameBookService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -104,5 +105,15 @@ public class HomeController {
         nameBookService.add(post);
 
         return "namebook/write-save";
+    }
+
+    @GetMapping("/namebook/list")
+    public ModelAndView nameBookList() {
+        List<NameBookPost> list = nameBookService.list();
+
+        ModelAndView mv = new ModelAndView("namebook/list");
+        mv.addObject("list", list);
+
+        return mv;
     }
 }
