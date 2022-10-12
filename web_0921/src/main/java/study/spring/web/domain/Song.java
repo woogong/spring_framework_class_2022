@@ -1,6 +1,8 @@
 package study.spring.web.domain;
 
 public class Song {
+    private Long idx;
+
     private String title;
 
     private String singer;
@@ -14,6 +16,14 @@ public class Song {
         this.composer = composer;
         this.singer = singer;
         this.year = year;
+    }
+
+    public Long getIdx() {
+        return idx;
+    }
+
+    public void setIdx(Long idx) {
+        this.idx = idx;
     }
 
     public String getTitle() {

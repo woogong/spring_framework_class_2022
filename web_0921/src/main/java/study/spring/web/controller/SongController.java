@@ -2,10 +2,7 @@ package study.spring.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import study.spring.web.domain.Song;
 import study.spring.web.service.SongService;
@@ -48,6 +45,17 @@ public class SongController {
 
         List<Song> list = songService.getList();
         mv.addObject("list", list);
+
+        return mv;
+    }
+
+    @GetMapping("/view/{idx}")
+    public ModelAndView view(
+            @PathVariable("idx") Long idx) {
+        ModelAndView mv = new ModelAndView("song/view");
+
+        Song song = songService.read(idx);
+        mv.addObject("song", song);
 
         return mv;
     }

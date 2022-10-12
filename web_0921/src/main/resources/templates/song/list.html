@@ -25,7 +25,7 @@
   </thead>
   <tbody>
     <tr th:each="item : ${list}">
-      <td th:text="${item.title}"></td>
+      <td><a th:href="@{view/{id}(id = ${item.idx})}" th:text="${item.title}"></a></td>
       <td th:text="${item.singer}"></td>
       <td th:text="${item.composer}"></td>
       <td th:text="${item.year}"></td>
