@@ -49,7 +49,7 @@ public class SongController {
         return mv;
     }
 
-    @GetMapping("/view/{idx}")
+    @RequestMapping("/view/{idx}")
     public ModelAndView view(
             @PathVariable("idx") Long idx) {
         ModelAndView mv = new ModelAndView("song/view");
@@ -58,6 +58,40 @@ public class SongController {
         mv.addObject("song", song);
 
         return mv;
+    }
+
+    @GetMapping("/update/{idx}")
+    public ModelAndView update(
+            @PathVariable("idx") Long idx) {
+        ModelAndView mv = new ModelAndView("song/update");
+
+        Song song = songService.read(idx);
+        mv.addObject("song", song);
+
+        return mv;
+    }
+
+    @RequestMapping("/update-save.do")
+    public String updateSave(
+            @RequestParam("idx") Long idx
+            , @RequestParam("title") String title
+            , @RequestParam("singer") String singer
+            , @RequestParam("composer") String composer
+            , @RequestParam("year") int year) {
+
+        Song song = new Song(title, singer, composer, year);
+        song.setIdx(idx);
+
+        songService.update(song);
+
+        return "redirect:view/" + idx;
+    }
+
+    @RequestMapping("/delete.do/{idx}")
+    public String delete(@PathVariable("idx") Long idx) {
+        songService.delete(idx);
+
+        return "redirect:../list";
     }
 
 }
