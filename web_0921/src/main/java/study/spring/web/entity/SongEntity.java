@@ -9,19 +9,20 @@ public class SongEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idx;
 
+    @Column(length = 1000)
     private String title;
 
     private String singer;
 
     private String composer;
 
-    private int publishingYear;
+    @Column(name = "published_year")
+    private int year;
 
     public SongEntity() {
 
     }
 
-    /*
     public SongEntity(Long idx, String title, String singer, String composer, int year) {
         this.idx = idx;
         this.title = title;
@@ -29,8 +30,6 @@ public class SongEntity {
         this.singer = singer;
         this.year = year;
     }
-     */
-
 
     public Long getIdx() {
         return idx;
@@ -64,11 +63,11 @@ public class SongEntity {
         this.composer = composer;
     }
 
-    public int getPublishingYear() {
-        return publishingYear;
+    public int getYear() {
+        return year;
     }
 
-    public void setPublishingYear(int publishingYear) {
-        this.publishingYear = publishingYear;
+    public void setYear(int year) {
+        this.year = year;
     }
 }

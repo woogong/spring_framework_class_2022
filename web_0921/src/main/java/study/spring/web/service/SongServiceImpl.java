@@ -27,7 +27,7 @@ public class SongServiceImpl implements SongService {
         songEntity.setTitle(song.getTitle());
         songEntity.setSinger(song.getSinger());
         songEntity.setComposer(song.getComposer());
-        songEntity.setPublishingYear(song.getYear());
+        songEntity.setYear(song.getYear());
 
 
         songRepository.save(songEntity);
