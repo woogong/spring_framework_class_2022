@@ -2,6 +2,8 @@ package study.spring.web.service;
 
 import study.spring.web.domain.Song;
 
+import java.util.List;
+
 public interface SongService {
     /**
      * 새 노래를 등록한다.
@@ -11,4 +13,10 @@ public interface SongService {
      */
     public Song addSong(Song song);
 
+    /**
+     * 등록된 노래 목록을 가져온다.
+     *
+     * @return 등록된 노래 목록
+     */
+    public List<Song> getList();
 }

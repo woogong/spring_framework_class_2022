@@ -1,10 +1,14 @@
 package study.spring.web.service;
 
+import com.fasterxml.jackson.core.io.JsonEOFException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import study.spring.web.domain.Song;
 import study.spring.web.entity.SongEntity;
 import study.spring.web.repository.SongRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service(value = "songService")
 public class SongServiceImpl implements SongService {
@@ -33,5 +37,20 @@ public class SongServiceImpl implements SongService {
         songRepository.save(songEntity);
 
         return song;
+    }
+
+    @Override
+    public List<Song> getList() {
+        List<SongEntity> list = songRepository.findAll();
+
+        List<Song> result = new ArrayList<>();
+        for (SongEntity item : list) {
+            Song song = new Song(item.getTitle(), item.getSinger(),
+                    item.getComposer(), item.getYear());
+
+            result.add(song);
+        }
+
+        return result;
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 import study.spring.web.domain.Song;
 import study.spring.web.service.SongService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/song")
 public class SongController {
@@ -38,6 +40,16 @@ public class SongController {
         songService.addSong(song);
 
         return "redirect:list";
+    }
+
+    @GetMapping("/list")
+    public ModelAndView list() {
+        ModelAndView mv = new ModelAndView("song/list");
+
+        List<Song> list = songService.getList();
+        mv.addObject("list", list);
+
+        return mv;
     }
 
 }
