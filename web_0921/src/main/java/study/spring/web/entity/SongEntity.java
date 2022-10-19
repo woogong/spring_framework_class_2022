@@ -12,7 +12,9 @@ public class SongEntity {
     @Column(length = 1000)
     private String title;
 
-    private String singer;
+    @ManyToOne(targetEntity = ArtistEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "artist_idx")
+    private ArtistEntity artist;
 
     private String composer;
 
@@ -23,11 +25,10 @@ public class SongEntity {
 
     }
 
-    public SongEntity(Long idx, String title, String singer, String composer, int year) {
+    public SongEntity(Long idx, String title, String composer, int year) {
         this.idx = idx;
         this.title = title;
         this.composer = composer;
-        this.singer = singer;
         this.year = year;
     }
 
@@ -47,12 +48,12 @@ public class SongEntity {
         this.title = title;
     }
 
-    public String getSinger() {
-        return singer;
+    public ArtistEntity getArtist() {
+        return artist;
     }
 
-    public void setSinger(String singer) {
-        this.singer = singer;
+    public void setArtist(ArtistEntity artist) {
+        this.artist = artist;
     }
 
     public String getComposer() {
