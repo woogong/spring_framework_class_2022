@@ -37,8 +37,8 @@ public class SongServiceImpl implements SongService {
         artist.setName("BTS");
         artist.setDebutYear(2013);
         artistRepository.save(artist);
-        SongEntity songEntity = new SongEntity();
 
+        SongEntity songEntity = new SongEntity();
         songEntity.setTitle("다이너마이트");
         songEntity.setYear(2020);
         songEntity.setComposer("미국사람");
@@ -50,10 +50,24 @@ public class SongServiceImpl implements SongService {
         artist.setDebutYear(2015);
         artistRepository.save(artist);
 
+        songEntity = new SongEntity();
+        songEntity.setTitle("마지막처럼");
+        songEntity.setYear(2022);
+        songEntity.setComposer("누군가");
+        songEntity.setArtist(artist);
+        songRepository.save(songEntity);
+
+        songEntity = new SongEntity();
         artist = new ArtistEntity();
         artist.setName("아이유");
         artist.setDebutYear(2005);
         artistRepository.save(artist);
+
+        songEntity.setTitle("드라마");
+        songEntity.setYear(2019);
+        songEntity.setComposer("작곡가");
+        songEntity.setArtist(artist);
+        songRepository.save(songEntity);
 
     }
 
@@ -86,6 +100,12 @@ public class SongServiceImpl implements SongService {
             Song song = new Song(item.getTitle(),
                     item.getComposer(), item.getYear());
             song.setIdx(item.getIdx());
+
+            Artist artist = new Artist();
+            artist.setArtistIdx(item.getArtist().getArtistIdx());
+            artist.setName(item.getArtist().getName());
+            artist.setDebutYear(item.getArtist().getDebutYear());
+            song.setArtist(artist);
 
             result.add(song);
         }
