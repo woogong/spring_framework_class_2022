@@ -20,6 +20,8 @@ public interface SongService {
      */
     public List<Song> getList();
 
+    public List<Song> getList(String title);
+
     /**
      * 주어진 idx을 가진 노래를 가져온다.
      *

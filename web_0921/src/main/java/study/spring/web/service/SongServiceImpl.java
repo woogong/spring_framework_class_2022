@@ -94,7 +94,16 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> getList() {
         List<SongEntity> list = songRepository.findAll();
+        return makeSongList(list);
+    }
 
+    @Override
+    public List<Song> getList(String title) {
+        List<SongEntity> list = songRepository.findByTitle(title);
+        return makeSongList(list);
+    }
+
+    private List<Song> makeSongList(List<SongEntity> list) {
         List<Song> result = new ArrayList<>();
         for (SongEntity item : list) {
             Song song = new Song(item.getTitle(),
