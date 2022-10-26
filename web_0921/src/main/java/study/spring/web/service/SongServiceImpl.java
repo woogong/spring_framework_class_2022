@@ -103,6 +103,12 @@ public class SongServiceImpl implements SongService {
         return makeSongList(list);
     }
 
+    @Override
+    public List<Song> getList(int year) {
+        List<SongEntity> list = songRepository.findByYear(year);
+        return makeSongList(list);
+    }
+
     private List<Song> makeSongList(List<SongEntity> list) {
         List<Song> result = new ArrayList<>();
         for (SongEntity item : list) {
