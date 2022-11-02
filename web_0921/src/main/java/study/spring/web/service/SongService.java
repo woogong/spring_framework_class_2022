@@ -36,4 +36,6 @@ public interface SongService {
 
     public void delete(Long idx);
 
+    public void updateName(Long idx, String name);
+
 }

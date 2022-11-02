@@ -164,4 +164,9 @@ public class SongServiceImpl implements SongService {
     public void delete(Long idx) {
         songRepository.deleteById(idx);
     }
+
+    @Override
+    public void updateName(Long idx, String name) {
+        songRepository.updateTest(idx, name);
+    }
 }

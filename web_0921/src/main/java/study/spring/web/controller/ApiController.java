@@ -1,10 +1,12 @@
 package study.spring.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import study.spring.web.domain.Person;
+import study.spring.web.service.SongService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +14,13 @@ import java.util.Date;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
+
+    SongService songService;
+
+    @Autowired
+    public void setSongService(SongService songService) {
+        this.songService = songService;
+    }
 
     @GetMapping("/now")
     public String now() {
@@ -42,6 +51,12 @@ public class ApiController {
     public String add(@RequestParam(value = "value1", defaultValue = "10") int value1,
                       @RequestParam(value = "value2", defaultValue = "15") int value2) {
         return String.format("%d + %d = %d", value1, value2, value1 + value2);
+    }
+
+    @GetMapping("/update")
+    public String updateName() {
+        songService.updateName(1L, "바뀐 이름");
+        return "OK";
     }
 
 }
