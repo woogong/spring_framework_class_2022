@@ -8,6 +8,7 @@ import study.spring.practice.domain.User;
 import study.spring.practice.entity.UserEntity;
 import study.spring.practice.repository.UserRepository;
 
+import javax.annotation.PostConstruct;
 import java.util.Date;
 import java.util.Optional;
 
@@ -16,6 +17,18 @@ public class UserServiceWithDb implements UserService {
     private UserRepository userRepository;
 
     private PasswordEncoder passwordEncoder;
+
+    @PostConstruct
+    public void prepare() {
+        User user = null;
+
+        user = new User("aaaa", "1111", "사용자", 1);
+        register(user);
+
+        user = new User("bbbb", "2222", "관리자", 9);
+        register(user);
+
+    }
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {

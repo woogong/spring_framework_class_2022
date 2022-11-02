@@ -113,6 +113,7 @@ public class User {
         user.setEmail(entity.getEmail());
         user.setPassword(entity.getPassword());
         user.setName(entity.getName());
+        user.setGrade(entity.getGrade());
         user.setRegisterTime(entity.getRegisterTime());
         user.setLastLoginTime(entity.getLastLoginTime());
         user.setWithdrawed(entity.isWithdrawed());
