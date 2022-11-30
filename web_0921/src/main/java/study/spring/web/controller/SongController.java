@@ -62,6 +62,11 @@ public class SongController {
         return mv;
     }
 
+    @GetMapping("/list-rest")
+    public String songList() {
+        return "song/list-rest";
+    }
+
     @RequestMapping("/view/{idx}")
     public ModelAndView view(
             @PathVariable("idx") Long idx) {

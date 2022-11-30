@@ -98,6 +98,7 @@ public class HomeController {
             @RequestParam("writer") String writer
             , @RequestParam("content") String content
     ) {
+
         NameBookPost post = new NameBookPost();
         post.setWriter(writer);
         post.setContent(content);
@@ -126,5 +127,11 @@ public class HomeController {
     public String adder() {
         return "calc/adder";
     }
+
+    @GetMapping("/calc/subtract")
+    public String subtracter() {
+        return "calc/subtracter";
+    }
+
 
 }

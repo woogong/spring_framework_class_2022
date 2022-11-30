@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Song</title>
+
+  <link href="/css/song.css?1" rel="stylesheet">
+
+
+  <script
+          src="https://code.jquery.com/jquery-3.6.1.js"
+          integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+          crossorigin="anonymous"></script>
+
+  <script>
+
+    $(document).ready(() => {
+      // 서버에서 노래 목록을 읽어온다.
+      readSongList();
+
+
+    });
+
+    const readSongList = () => {
+        $.get("/rest/song-list", null, (response) => {
+            console.log(response);
+            showList(response);
+        });
+    };
+
+
+    const showList = (list) => {
+        $("tbody").empty();
+
+        for (let item of list) {
+            showLine(item);
+        }
+    };
+
+    const showLine = (data) => {
+        let tr = $("<tr></tr>");
+
+        let titleTd = $("<td></td>");
+        let aTag = $("<a></a>");
+        aTag.attr("href", "javascript:;");
+        aTag.on("click", () => {
+            location.href = "view/" + data.idx;
+        });
+        aTag.html(data.title);
+        titleTd.append(aTag);
+        tr.append(titleTd);
+
+        let artistTd = $("<td></td>");
+        artistTd.html(data.artist.name);
+        tr.append(artistTd);
+
+        let composerTd = $("<td></td>");
+        composerTd.html(data.composer);
+        tr.append(composerTd);
+
+        let yearTd = $("<td></td>");
+        yearTd.html(data.year);
+        tr.append(yearTd);
+
+        $("tbody").append(tr);
+    };
+
+  </script>
+
+
+</head>
+<body>
+<h1>노래 목록</h1>
+
+<div>
+  <a href="add">추가</a>
+</div>
+
+<table class="list">
+  <thead>
+    <tr>
+      <th>제목</th>
+      <th>가수</th>
+      <th>작곡자</th>
+      <th>발표년도</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<div>
+  <form action="list" method="get">
+    <select name="type">
+      <option>제목</option>
+      <option>발표년도</option>
+    </select>
+
+    <input type="text" name="query">
+
+    <button>검색</button>
+  </form>
+</div>
+
+
+</body>
+</html>
