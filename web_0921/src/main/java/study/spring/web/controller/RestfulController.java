@@ -46,7 +46,20 @@ public class RestfulController {
     }
 
     @GetMapping("/song-list")
-    public List<Song> songList() {
-        return songService.getList();
+    public List<Song> songList(@RequestParam(value = "type", defaultValue = "제목") String type,
+                               @RequestParam(value = "query", required = false) String query) {
+        List<Song> list = null;
+        if (query != null && query.length() > 0) {
+            if (type.equals("발표년도")) {
+                int year = Integer.parseInt(query);
+                list = songService.getList(year);
+            } else {
+                list = songService.getList(query);
+            }
+        } else {
+            list = songService.getList();
+        }
+
+        return list;
     }
 }

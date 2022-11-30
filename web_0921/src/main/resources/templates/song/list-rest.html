@@ -18,11 +18,25 @@
       // 서버에서 노래 목록을 읽어온다.
       readSongList();
 
+      $("#btn_search").on("click", () => {
+          readSongList();
+      });
 
     });
 
     const readSongList = () => {
-        $.get("/rest/song-list", null, (response) => {
+        let query = $("[name='query']").val();
+        let type = $("[name='type']").val();
+
+        let params = null;
+        if (query.length > 0) {
+            params = {
+                'type': type,
+                'query': query
+            };
+        }
+
+        $.get("/rest/song-list", params, (response) => {
             console.log(response);
             showList(response);
         });
@@ -90,7 +104,6 @@
 </table>
 
 <div>
-  <form action="list" method="get">
     <select name="type">
       <option>제목</option>
       <option>발표년도</option>
@@ -98,8 +111,7 @@
 
     <input type="text" name="query">
 
-    <button>검색</button>
-  </form>
+    <button id="btn_search">검색</button>
 </div>
 
 
